@@ -1,0 +1,45 @@
+{
+  "name": "react_seed",
+  "version": "1.0.0",
+  "description": "Small starter kit for personal React-flavored projects",
+  "main": "index.js",
+  "repository": "https://github.com/krs-10/react_seed",
+  "author": "Kristen Overberg",
+  "license": "MIT",
+  "private": false,
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "prod": "NODE_ENV='production' webpack --mode production --config webpack.prod.js",
+    "dev": "NODE_ENV='development' webpack-dev-server --watch --colors --mode development"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-export-default": "^7.0.0-beta.32",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.4.0",
+    "style-loader": "^0.23.1",
+    "svg-loader": "^0.0.2",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.25.1",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
