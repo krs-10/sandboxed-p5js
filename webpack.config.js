@@ -11,15 +11,20 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 let htmlTemplateFile = path.resolve(__dirname, 'src/index.html');
 
 
-
-
-const externals = ["react", "fabric"];
+const externals = ["react"];
 
 module.exports = {
   mode: 'development',
   entry: {
-    vendor: ['@babel/polyfill', 'react', 'react-dom'], 
+    vendor: ['@babel/polyfill', 'react'], 
     client: path.resolve(__dirname, "src/index.js")
+  },
+  resolve: {
+    alias: {
+    components: path.resolve(__dirname, 'src/components/'), 
+    styles: path.resolve(__dirname, 'src/styles/'), 
+    assets: path.resolve(__dirname, 'src/assets/'), 
+    }
   },
   optimization: {
     runtimeChunk: true,
@@ -44,12 +49,6 @@ module.exports = {
     inline: true,
     historyApiFallback: true,
     disableHostCheck: true,
-    proxy: [
-      {
-        context: ["/imprints", "/users", "/assets", "/signed_url"],
-        target: "http://localhost:3003"
-      }
-    ]
   },
   output: {
     path: path.resolve(__dirname, "build"),
@@ -107,6 +106,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      React: 'react', 
+      Fragment: ['react', 'Fragment'], 
+      Component: ['react', 'Component']
+    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: htmlTemplateFile,

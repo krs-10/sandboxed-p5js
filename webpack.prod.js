@@ -10,7 +10,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 let htmlTemplateFile = path.resolve(__dirname, 'src/index.html');
-if (process.env.NODE_ENV === 'development') htmlTemplateFile = path.resolve(__dirname, 'src/development.html');
+
 
 
 const externals = ["react", "fabric"];
