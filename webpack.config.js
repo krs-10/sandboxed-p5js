@@ -9,7 +9,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin; 
 
 let htmlTemplateFile = path.resolve(__dirname, 'src/index.html');
-if (process.env.NODE_ENV === 'development') htmlTemplateFile = path.resolve(__dirname, 'src/development.html');
+
 
 
 
@@ -18,7 +18,7 @@ const externals = ["react", "fabric"];
 module.exports = {
   mode: 'development',
   entry: {
-    vendor: ['babel-polyfill', 'react', 'react-dom', 'fabric'], 
+    vendor: ['@babel/polyfill', 'react', 'react-dom'], 
     client: path.resolve(__dirname, "src/index.js")
   },
   optimization: {
