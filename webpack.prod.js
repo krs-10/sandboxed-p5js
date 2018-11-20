@@ -1,33 +1,27 @@
-'use strict';
+"use strict";
 
-const webpack = require("webpack");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const webpack = require("webpack"),
+  path = require("path"),
+  HtmlWebpackPlugin = require("html-webpack-plugin"),
+  MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+  CleanWebpackPlugin = require("clean-webpack-plugin"),
+  OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
+  UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
+  BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+    .BundleAnalyzerPlugin;
 
-let htmlTemplateFile = path.resolve(__dirname, 'src/index.html');
+const merge = require("webpack-merge"), 
+  common = require('./webpack.common.js');
 
+const externals = ["react"];
 
-
-const externals = ["react", "fabric"];
-
-module.exports = {
-  mode: 'production',
+const PRODUCTION = {
+  mode: "production",
   entry: {
-    client: path.resolve(__dirname, "src/index.js"), 
+    client: path.resolve(__dirname, "src/index.js")
   },
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "[name].[hash].js",
-    chunkFilename: "[name].[hash].bundle.js", 
-    publicPath: "./"
-  },
-  resolve: {
-    extensions: [".js", ".jsx", ".json"]
+    publicPath: ""
   },
   optimization: {
     minimizer: [
@@ -38,13 +32,17 @@ module.exports = {
       }),
       new OptimizeCssAssetsPlugin({
         cssProcessorPluginOptions: {
-          preset: ['default', { 
-            mergeIdents: true,
-            discardComments: { removeAll: true } }],
-        },
+          preset: [
+            "default",
+            {
+              mergeIdents: true,
+              discardComments: { removeAll: true }
+            }
+          ]
+        }
       })
     ],
-    runtimeChunk: 'single',
+    runtimeChunk: "single",
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -54,11 +52,11 @@ module.exports = {
           chunks: "all",
           name: "vendors",
           reuseExistingChunk: true
-        }, 
+        },
         styles: {
-          name: 'styles', 
-          test: /\.css$/, 
-          chunks: 'all', 
+          name: "styles",
+          test: /\.css$/,
+          chunks: "all",
           enforce: true
         }
       }
@@ -70,46 +68,24 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: { loader: "babel-loader", 
-        options: {
-          cacheDirectory: true
-        }}
+        use: {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true
+          }
+        }
       },
       {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: "css-loader", 
+            loader: "css-loader",
             options: {
               importLoaders: 1
             }
           },
-          { loader: "postcss-loader"}
-        ]
-      },
-      {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: { loader: "url-loader" }
-      },
-      {
-        test: /\.(ttf|eot|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: { loader: "url-loader" }
-      },
-      {
-        test: /\.(woff|wav|mp3)$/,
-        use: ["file-loader"]
-      },
-      {
-        test: /\.(jpe?g|gif|png|svg)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "public/images/"
-            }
-          }
+          { loader: "postcss-loader" }
         ]
       }
     ]
@@ -117,13 +93,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin("build", {}),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: htmlTemplateFile,
-      sourceMap: true,
-      chunksSortMode: "dependency"
-    }),
-    new BundleAnalyzerPlugin({ open: true })
+    // new BundleAnalyzerPlugin({ open: true })
     // new WebpackMd5Hash
   ]
 };
+
+
+module.exports = merge(common, PRODUCTION)
