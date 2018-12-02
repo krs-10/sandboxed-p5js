@@ -1,9 +1,9 @@
 {
-  "name": "react_seed",
+  "name": "sandboxed_p5js",
   "version": "1.0.0",
-  "description": "Small starter kit for personal React-flavored projects",
+  "description": "Testing out some p5.js",
   "main": "index.js",
-  "repository": "https://github.com/krs-10/react_seed",
+  "repository": "https://github.com/krs-10/sandboxed-p5js",
   "author": "Kristen Overberg",
   "license": "MIT",
   "private": false,
@@ -17,6 +17,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
     "express": "^4.16.4",
+    "p5": "^0.7.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
