@@ -13,7 +13,7 @@ const webpack = require("webpack"),
 const merge = require("webpack-merge"), 
   common = require('./webpack.common.js');
 
-const externals = ["react"];
+const externals = [];
 
 const PRODUCTION = {
   mode: "production",

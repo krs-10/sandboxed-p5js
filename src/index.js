@@ -1,7 +1,7 @@
-import ReactDOM from "react-dom";
+
 require("./styles/skeleton.css");
-require("./styles/main.css");
 
-import App from "./App";
-
-ReactDOM.render(<App />, document.getElementById("root"));
+import Canvas from 'components/Canvas'; 
+const NewCanvas = new Canvas(100, 200);
+const Inside = NewCanvas.create();
+document.querySelector('[data-root]').innerHTML = `<h1>${NewCanvas.create()}</h1>`;

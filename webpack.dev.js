@@ -7,12 +7,12 @@ const merge = require("webpack-merge"),
   common = require('./webpack.common.js');
 
 
-const externals = ["react"];
+const externals = [];
 
 const DEVELOPMENT = {
   mode: 'development',
   entry: {
-    vendor: ['@babel/polyfill', 'react'], 
+    vendor: ['@babel/polyfill'], 
     client: path.resolve(__dirname, "src/index.js")
   },
   optimization: {

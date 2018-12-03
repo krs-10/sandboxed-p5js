@@ -52,9 +52,7 @@ const COMMON_OUTPUT = {
 
 const COMMON_PLUGINS = [
   new webpack.ProvidePlugin({
-    React: "react",
-    Fragment: ["react", "Fragment"],
-    Component: ["react", "Component"]
+	p5: "p5"
   }),
   new HtmlWebpackPlugin({
     inject: true,
