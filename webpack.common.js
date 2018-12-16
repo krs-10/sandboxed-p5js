@@ -1,6 +1,6 @@
 const path = require("path"), 
 	webpack = require("webpack"), 
-	HtmlWebpackPlugin = require("html-webpack-plugin"); 
+	HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const COMMON_RULES = [
 	// js
@@ -52,7 +52,7 @@ const COMMON_OUTPUT = {
 
 const COMMON_PLUGINS = [
   new webpack.ProvidePlugin({
-	p5: "p5"
+	p5: "p5", 
   }),
   new HtmlWebpackPlugin({
     inject: true,
