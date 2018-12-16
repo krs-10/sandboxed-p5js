@@ -1,10 +1,12 @@
 class Canvas {
-	constructor(height, width) {
+	children = '<div>no kids???</div>'
+	constructor(height, width, children) {
 		this.height = height;
 		this.width = width;
+		this.children = children; 
 	}
-	create(){
-		return `<div>Here we have width ${this.width} and height ${this.height}</div>`
+	create(children){
+		return `<div>Here we have width ${this.width} and height ${this.height}</div><div>${this.children}</div>`
 	}
 }
 

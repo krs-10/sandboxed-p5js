@@ -4,22 +4,17 @@ require("./styles/skeleton.css");
 
 import Canvas from 'components/Canvas'; 
 import Instance from 'components/Instance';
+import Follower from 'components/Follower';
 
 
 
-const NewCanvas = new Canvas(100, 200);
 
+const NewCanvas = new Canvas(1200, 200);
+// NewInstance = new Instance({ width: 900, height: 100, fill: 249, background: 230 });
 
-// const NewImage = new Image()
+const NewFollower = new Follower({x0: 40});
+// document.querySelector('[data-root]').innerHTML = 
+// `${new Instance({width: 900, height: 100, fill: 249, background: 230})}`;
 
-
-// newInstance.setup();
-// newInstance.draw();
-
-const Inside = NewCanvas.create();
-
-
-// console.log('index.js -  NewImage: ', NewImage);
-// window.NewImage = NewImage; 
-
-document.querySelector('[data-root]').innerHTML = `<h1>${new Instance({width: 900, height: 100, fill: 249, background: 230})}</h1>`;
+document.querySelector('[data-root]').innerHTML =
+	`<div>${NewCanvas.create('hi')}</div>`;

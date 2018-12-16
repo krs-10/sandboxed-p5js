@@ -6,9 +6,6 @@ const path = require("path");
 const merge = require("webpack-merge"),
   common = require('./webpack.common.js');
 
-const p5dom = (path.resolve(__dirname, "node_modules/p5/lib/addons/p5.min.js")),
-  p5sound = (path.resolve(__dirname, "src/libs/p5.sound.min.js"));
-///Users/Kristen/Code/Mine/sandboxed-p5js/node_modules/p5/lib/addons/p5.dom.js
 
 
 const externals = [];
