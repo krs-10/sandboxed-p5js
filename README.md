@@ -1,15 +1,9 @@
-*react_seed*
-**Little seed for personal React-flavored projects**
+**p5.js Sandbox**
 
-***Current***
-- React
-- Webpack 
-- Babel 
-- PostCSS
-- Express
+Experimenting with [p5.js](https://p5js.org/) sketches
 
-***TODO***
-- Typescript
-- Emotion
-- MongoDB?
+Attempting to "classify" p5.js, and leverage that class to generate sketches in a more ES6-y manner
+
+
+
 
