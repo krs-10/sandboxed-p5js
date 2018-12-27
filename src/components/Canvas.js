@@ -1,13 +1,25 @@
 class Canvas {
-	children = '<div>no kids???</div>'
-	constructor(height, width, children) {
-		this.height = height;
+	width = 400
+	height = 400
+	rest = false
+	constructor({width, height, ...rest}) {
 		this.width = width;
-		this.children = children; 
+		this.height = height;
+		this.rest = rest; 
+		console.log('Canvas.js -  rest: ', rest);
+		this.props = this.rest ? this.modProps() : '';
 	}
-	create(children){
-		return `<div>Here we have width ${this.width} and height ${this.height}</div><div>${this.children}</div>`
+	modProps(){
+		return Object.entries(this.rest).reduce((total, [key, val], i) => {
+			total += ` ${key}="${val}"`; 
+			return total; 
+		}, ' ');
+	}
+	create(){
+		return `<canvas ${this.props} width="${this.width}" height="${this.height}">
+		</canvas>`
 	}
 }
+
 
 export default Canvas; 
