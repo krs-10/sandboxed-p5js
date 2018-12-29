@@ -12,12 +12,12 @@ class Instance {
 		this.height = height; 
 		this.p5 = p5; 
 		this.cb = cb; 
+		this.canvas = null; 
 		Object.assign(this, rest);
 	}
-
 	setup = () => {
 		const { res, width, height } = this; 
-		res.createCanvas(width, height);
+		this.canvas = res.createCanvas(width, height);
 		res.noLoop();
 		return this; 
 	}

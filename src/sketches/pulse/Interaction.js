@@ -1,8 +1,8 @@
-import Instance from "../components/Instance";
+import Instance from "../../components/Instance";
 
 const noop = () => { }
 
-class Pulse extends Instance {
+class Interaction extends Instance {
 	width = 30
 	height = 20
 	angle = 0
@@ -37,4 +37,4 @@ class Pulse extends Instance {
 	};
 }
 
-export default Pulse; 
+export default Interaction; 

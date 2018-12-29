@@ -24,6 +24,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-export-default": "^7.0.0-beta.32",
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-private-methods": "^7.2.3",
     "@babel/preset-env": "^7.1.6",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",

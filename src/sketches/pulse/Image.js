@@ -1,12 +1,13 @@
-import Instance from "../components/Instance";
+import Base from "./Base";
 
-class PulseBg extends Instance {
+const noop = () => {};
+class Image extends Base {
   url = "../assets/images/paprika.JPG"
   constructor({ width, height, url } = {}) {
-    super();
+  super();
 	this.url;
-	this.width = width; 
-	this.height = height; 
+	this.width = width;
+	this.height = height;
   }
   draw = () => {
 	const { res, img, width, height } = this;
@@ -29,4 +30,5 @@ class PulseBg extends Instance {
   };
 }
 
-export default PulseBg; 
+
+export default Image;
