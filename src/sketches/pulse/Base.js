@@ -8,40 +8,57 @@ class Base {
 	cb = noop
 	p5 = p5
 	foobar = 'bezbaz'
-	funcs = {}
 	constructor({ canvas, ...rest } = {}) {
 		this.canvas = null;
 		Object.assign(this, rest);
 	}
-	#parse(response){
-		console.log('private');
-		let { ...hi } = this; 
-		return hi; 
-		// let { res, ...rest } = this; 
-		// return {res, ...rest};
+	#parse(response) {
+		let { ...hi } = this;
+		return hi;
 	}
-	setup = ({res, width, height} = {}) => {
-		// console.log('Base.js -  hello: ', hello);
-		// const { res, width, height } = this;
-		// res.createCanvas(500, 600)
-		this.canvas = res.createCanvas(width, height);
-		res.noLoop();
-		// return this;
+	#setup = (arg) => {
+		if (this.setup) return this.setup();
+		else{
+			const { res, width, height } = this;
+			res.createCanvas(width, height);
+			res.background("blue")
+			res.noLoop();
+		}
 	}
-	draw = ({res}) => {
-		res.fill("purple")
-		res.background(222);
-		res.rect(0, 0, 50, 50);
-	}
-	init = (parent = null) => {
-		const argu = this.#parse();
+	init = (parent = null, funcs = []) => {
 		new p5((res) => {
-			// this.res = res;
-			res.setup = () => this.setup({res: res, ...argu})
-			console.log('Base.js -  res.setup: ', res.setup);
-			res.draw = () => this.draw({ res: res, ...argu })
+			this.res = res;
+			res.setup = this.#setup
+			if (funcs && funcs.length > 0)
+			for (let f = 0; f < funcs.length; f++ ){
+				if (this[funcs[f]]) res[funcs[f]] = this[funcs[f]];
+			}
 		}, parent)
 	}
 }
+
+
+class Kiddo extends Base {
+	width = 400
+	height = 555
+	constructor({...rest} = {}){
+		super();
+		Object.assign(this, rest);
+	}
+	setup = () => {
+		const { width, height, res } = this; 
+		this.canvas = this.res.createCanvas(width, height, res.WEBGL);
+	}
+	draw = () => {
+		this.makeLine()
+	}
+	makeLine = () => {
+		this.res.line(0, 0, 200, 200)
+	}
+}
+
+var foobar = new Kiddo({width: 222, height: 333});
+foobar.init(null, ['draw']);
+
 
 export default Base; 

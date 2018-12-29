@@ -12,8 +12,7 @@ import Image from "./sketches/pulse/Image";
 import Base from "./sketches/pulse/Base";
 
 const NewCanvas = new Canvas({width: 400, height: 900, id: "main"});
-const blegh = new Base({width: 700});
-blegh.init();
+
 
 // const interaction = new PULSE.Interaction({width: 600, height: 600});
 // interaction.init("main");
