@@ -1,5 +1,7 @@
 import Image from "./Image";
 import Interaction from "./Interaction";
+import Foobar from "./Jitter";
+
 
 
 export default function Sketch(width, height, parent) {
@@ -8,7 +10,7 @@ export default function Sketch(width, height, parent) {
 
 	const start = (() => {
 		n_image.init()
-		n_interaction.init()
+		// n_interaction.init()
 	})
 
 	return { 

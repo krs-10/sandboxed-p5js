@@ -9,12 +9,14 @@ class Base {
 		Object.assign(this, rest);
 	}
 	init = (parent = null) => {
-		const {funcs} = this; 
 		new p5((res) => {
 			this.res = res;
+			let { funcs } = this; 
 			for (let f = 0; f < funcs.length; f++) {
-				let custom_f = funcs[f] || false; 
-				if (this[custom_f]) res[custom_f] = this[custom_f]
+				let custom_f = funcs[f];
+				if (this[custom_f]){
+					res[custom_f] = this[custom_f]
+				} 
 			}
 		}, parent)
 	}
