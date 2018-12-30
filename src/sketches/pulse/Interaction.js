@@ -1,16 +1,12 @@
-import Instance from "../../components/Instance";
+import Base from "../../components/Base";
 
 const noop = () => { }
 
-class Interaction extends Instance {
-	width = 30
-	height = 20
-	angle = 0
-	constructor({ width, height, angle = 0 } = {}) {
+class Interaction extends Base {
+	constructor({width = 800, height = 800, angle = 0, ...rest } = {}) {
 		super();
-		this.width = width;
-		this.height = height;
 		this.angle = angle; 
+		Object.assign(this, rest);
 	}
 	setup = () => {
 		const { res, width, height } = this; 
@@ -18,8 +14,7 @@ class Interaction extends Instance {
 		this.canvas.class("canvas--first");
 	}
 	draw = () => {
-		const { res } = this;
-		let { angle } = this; 
+		let { res, angle } = this;
 
 		if (res.mouseIsPressed === true){ 
 			// cos, radians, sin,
