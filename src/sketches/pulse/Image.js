@@ -4,52 +4,41 @@ const noop = () => {};
 
 let defaultUrl = "../assets/images/paprika.JPG"
 
-
-const geny = ((width, height, url) => {
-  let img; 
-  const preload = (res) => {
-    return img = res.loadImage(url)
-  }
-  const draw = (res) => {
-    img.filter("gray")
-  };
-  const setup = () => {
-    res.createCanvas(width, height);
-    res.noLoop()
-  }
-  return () => {
-    setup, 
-    preload, 
-    draw
-  }
-  })()
-
-geny(300, 400, defaultUrl)
-
-// geny('foobar').getA('bezbaz');
-// geny('heythere').getA('blughblugh')
-
-
+let defaults = {
+  width: 0, 
+  height: 0, 
+  url: defaultUrl,
+  funcs: ['draw', 'preload', 'setup'], 
+  foobar : noop
+}
 
 class Image extends Base {
-  width = 800
-  height = 800
-  constructor({width = 800, height = 800, url = defaultUrl, ...rest } = {}) {
+    constructor({y = 0, ...args} = {}){
     super();
-    Object.assign(this, rest);
-    this.width = width;
-    this.height = height; 
-    this.url = url;
-    
+    Object.assign(this, defaults,  args);
+    this.y = y; 
   }
   draw = () => {
-    const { res, img, width, height } = this;
-    img.filter("gray")
-    res.image(img, 0, 0);
+    this.weirdthing()
   };
+  weirdthing = () => {
+    const { res, img, width, height } = this
+    res.background(img);
+
+    res.stroke(226, 204, 0);
+    res.line(0, this.y, width, this.y);
+
+    this.y++;
+    if (this.y > height) {
+      this.y = 0;
+    }
+  }
   preload = () => {
     const { res, url } = this;
     this.img = res.loadImage(url);
+    this.img.width = this.width; 
+    this.img.height = this.height; 
+    window.img = this.img; 
   };
   setup = () => {
     const { res } = this;

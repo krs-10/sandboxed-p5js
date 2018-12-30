@@ -1,25 +1,23 @@
 import Image from "./Image";
 import Interaction from "./Interaction";
-import Base from "../../components/Base";
 
 
-class Sketch {
-	parent = null
-	width = 800
-	height = 800
-	constructor({...rest} = {}){
-		Object.assign(this, rest);
-	}
-	begin(){
-		const __interaction = new Interaction({width: this.width, height: this.height, angle: 0}), 
-			__image = new Image({width: this.width, height: this.height});
+export default function Sketch(width, height, parent) {
+	const n_image = new Image({width: width, height: height, parent: parent}), 
+		n_interaction = new Interaction({width: width, height: height, parent: parent})
 
-		__interaction.init(this.parent)
-		__image.init(this.parent)
-	}
+	const start = (() => {
+		n_image.init()
+		n_interaction.init()
+	})
+
+	return { 
+		image: n_image, 
+		interaction: n_interaction,
+		start
+	 }
 }
 
-export default Sketch; 
 
 // export default Sketch; 
 

@@ -2,11 +2,17 @@ import Base from "../../components/Base";
 
 const noop = () => { }
 
+let defaults = {
+	width: 0,
+	height: 0,
+	angle: 0,
+	funcs: ['draw', 'setup']
+}
+
 class Interaction extends Base {
-	constructor({width = 800, height = 800, angle = 0, ...rest } = {}) {
+	constructor(args = {}) {
 		super();
-		this.angle = angle; 
-		Object.assign(this, rest);
+		Object.assign(this, defaults, args);
 	}
 	setup = () => {
 		const { res, width, height } = this; 
