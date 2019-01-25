@@ -53,6 +53,7 @@ const COMMON_OUTPUT = {
 const COMMON_PLUGINS = [
   new webpack.ProvidePlugin({
 	p5: "p5", 
+	ml5: "ml5"
   }),
   new HtmlWebpackPlugin({
     inject: true,
