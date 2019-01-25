@@ -1,3 +1,7 @@
 .canvas--first{
 	position: absolute; 
 }
+
+.image--ml5{
+	transform: scale(0.5);
+}

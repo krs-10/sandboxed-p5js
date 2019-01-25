@@ -22,64 +22,106 @@ const defaults = {
 
 // MODEL()
 
-const OgShiba = (url = defaultUrl, width = 900, height = 900) => {
+const Shiba = ({url = defaultUrl, width = 900, height = 900, className = "image--ml5", ...rest} = {}) => {
+// 	parent = document.body, ...rest
+// } = { }
+let parent = document.body; 
+	let image, 
+	info,
+	analysis; 
+
   let MODEL = () => {
     return ml5.imageClassifier("MobileNet");
   };
-  const write = (err, results) => {
-    if (err)
-      return document.body.insertAdjacentHTML(
-        "beforeEnd",
-        `<div>we've got an error: ${err}</div>`
-	  );
-	console.log('WRITE -  results: ', results);
-    let domDone = results.map(({className, probability}, i) => {
-      return `<div>${className}, ~${probability}</div>`
-    }).concat(' ')
-    return document.body.insertAdjacentHTML(
-      "beforeEnd",
-      `<div><h3>Results!</h3><div>${domDone}</div></div>`
-    );
-  };
-  const load_image = () => {
-    let img = new Image();
+  let CLASSIFY = (classifier, subject) => {
+	  return classifier.predict(img, (error, results))
+  }
+	const write = (results, err) => {
+		if (err)
+			return (
+				"beforeEnd",
+				`<div>we've got an error: ${err}</div>`
+			);
+		let domDone = results.map(({ className, probability }, i) => {
+			return `<div>${className}, ~${probability}</div>`
+		}).concat(' ')
+		const newDiv = document.createElement("div");
+		newDiv.innerHTML = `<div><h3>Results!</h3><div>${domDone}</div></div>`
+		return newDiv; 
+		// return (
+		// 	"beforeEnd",
+		// 	`<div><h3>Results!</h3><div>${domDone}</div></div>`
+		// );
+	};
+  const load_image = ({url = defaultUrl, className="ml5__image", ...imageProps} ={}) => {
+	let img = new Image();
     img.src = url;
     return new Promise((res, rej) => {
       img.onload = e => {
-		  document.body.appendChild(img)
-        res(img);
+		  let formattedImg = Object.assign(img, {className, ...imageProps});
+		  image = formattedImg; 
+         res(formattedImg);
       };
     });
   };
-  const begin = async (...args) => {
+  const begin = async (cb = noop) => {
     const img = await load_image();
     MODEL().then(classifier => {
       classifier.predict(img, (error, results) => {
 		  write(error, results);
-      });
+		  return cb(image, error, results); 
+	  })
     });
   };
-  const model_ready = img => {
-    ml5
+
+  const fetchModel = () => {
+	  return ml5.imageClassifier("MobileNet");
+  }
+  const fetchPrediction = (model, img) => {
+	  return model.predict(img);
+  }
+  const model_ready = (img) => {
+    return ml5
       .imageClassifier("MobileNet")
       .then(classifier => {
-        classifier.predict(img);
+        return classifier.predict(img);
       })
-      .then((error, results) => {
-        // Do something with the results
-      });
   };
+  const testBegin = async () => {
+	  
+  }
+
+  const processImage = (image) => {
+	return fetchModel()
+		.then((classifier) => {
+			return classifier.predict(image)
+		})
+		.then((results, error) => {
+			return {results, image,  error}
+		})
+
+  }
+
+  const init = async (url = defaultUrl, {className = "ml5__image", ...imageOptions} = {}) => {
+	  const image = await load_image({ url = defaultUrl, className="ml5__image", ...imageOptions } = {});
+	  return model_ready(image).then((results, error) => {
+		  return { results, image, error };
+	  });
+  }
+  
+  // const img = await fetchImage('url'); 
+  // const classifier = await fetchModel()
+  // const prediction = await fetchPrediction(classifier, img)
+
   return {
-    begin: begin
-    // load_image: load_image,
-    // analyze: analyze,
-    // write: write
+    init: init,
+	processImage: processImage,
+	begin: begin, 
+	fetchImage: load_image,
+	fetchModel: fetchModel,
+	fetchPrediction: fetchPrediction,
+	writeResults: write, 
   };
 };
 
-const TestOgShiba = OgShiba();
-TestOgShiba.begin();
-const Shiba = noop;
-// Shiba.load_image()
-// Shiba.analyze()
 export default Shiba;
