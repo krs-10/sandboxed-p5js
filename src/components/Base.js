@@ -9,6 +9,7 @@ class Base {
 		Object.assign(this, rest);
 	}
 	init = (parent = null) => {
+		console.log('Base.js -  this: ', this);
 		new p5((res) => {
 			this.res = res;
 			let { funcs } = this; 

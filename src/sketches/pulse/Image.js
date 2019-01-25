@@ -5,69 +5,51 @@ const noop = () => {};
 let defaultUrl = "../assets/images/paprika.JPG"
 
 let defaults = {
-  width: 0, 
-  height: 0, 
+  width: 500, 
+  height: 500, 
   url: defaultUrl,
   funcs: ['draw', 'preload', 'setup']
 }
-
-const weirdo = (({res, img, width, height, y}) => {
-    console.log('Image.js -  res: ', res);
-    res.background(img);
-
-    res.stroke(226, 204, 0);
-    res.line(0, y, width, y);
-
-    y++;
-    if (y > height) {
-      y = 0;
-    }
-})
 
 class Image extends Base {
   constructor({ y = 0, ...args } = {}) {
     super();
     Object.assign(this, defaults, args);
     this.y = y;
+    this.imgWidth = 500
+    this.imgHeight = 500
   }
-  // draw = () => {
-  //   console.log('Image.js -  this: ', this);
-  //   console.log('Image.js -  weirdo: ', weirdo);
-  //   weirdo(this)
-  //   // this.weirdthing()
-  // }
   draw = () => {
-    this.weirdthing()
+    this.scanner()
   };
-  weirdthing = () => {
-    const { res, img, width, height } = this;
+  scanner = () => {
+    const { res, img, imgWidth, imgHeight } = this;
     res.background(img);
 
-    res.stroke(226, 204, 0);
-    res.line(0, this.y, width, this.y);
+    // res.strokeWeight = 200;
+   // res.stroke(226, 204, 0);
 
-    this.y++;
-    if (this.y > height) {
-      this.y = 0;
-    }
+    // res.line(5, this.y, imgWidth, 10);
+    // this.y++;
+    // if (this.y > imgHeight) {
+    //   this.y = 0;
+    // }
   };
   preload = () => {
     const { res, url } = this;
-    this.img = res.loadImage(url);
-    this.img.width = this.width;
-    this.img.height = this.height;
-    window.img = this.img;
-    return this; 
+    const image = res.loadImage(url, (callbackImage) => {
+      this.img = callbackImage;
+      this.imgWidth = callbackImage.width;
+      this.imgHeight = callbackImage.height;
+      return this; 
+    });
   };
   setup = () => {
-    const { res } = this;
-    this.canvas = res.createCanvas(this.width, this.height);
+    const { res, imgWidth, imgHeight } = this;
+    this.canvas = res.createCanvas(this.imgWidth, this.imgHeight);
     res.noLoop();
     return this; 
   };
 }
 
-const feee = new Image({width: 900, height:600})
-
-feee.init()
 export default Image;

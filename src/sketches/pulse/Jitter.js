@@ -9,7 +9,7 @@ let defaults = {
   funcs: ['setup', 'draw']
 }
 
-const Jitter = (({res, width, height}) => {
+const JitterFuncs = (({res, width, height}) => {
     let x = res.random(width), 
       y = res.random(height), 
       diameter = res.random(10, 30),
@@ -29,7 +29,7 @@ const Jitter = (({res, width, height}) => {
     }
 })
 
-class Foobar extends Base {
+class Jitter extends Base {
   constructor({ args } = {}) {
     super();
     Object.assign(this, defaults, args);
@@ -49,7 +49,7 @@ class Foobar extends Base {
   };
 }
 
-const feee = new Foobar({width: 900, height:600})
+// const feee = new Jitter({width: 900, height:600})
 
-feee.init()
-export default Foobar;
+// feee.init()
+export default Jitter;
