@@ -1,4 +1,5 @@
 import Base from "../../components/Base";
+import Voice from "../../components/Speech"; 
 
 const noop = () => {};
 
@@ -10,19 +11,8 @@ const defaults = {
   height: 900
 };
 
-// const MODEL = () => {
-// 	ml5.imageClassifier("MobileNet", (err, good) => {
-// 		console.log("model -  err, good: ", err, good);
-// 		 LOAD().then((resp) => {
-// 			 console.log('PlainShiba.js -  resp: ', resp);
-// 		 })
 
-// 	})
-// }
-
-// MODEL()
-
-const Shiba = ({url = defaultUrl, width = 900, height = 900, ...imageProperties} = {}) => {
+const FancyShiba = ({url = defaultUrl, width = 900, height = 900, ...imageProperties} = {}) => {
 // 	parent = document.body, ...rest
 // } = { }
 let parent = document.body; 
@@ -55,12 +45,14 @@ let parent = document.body;
 		return newDiv; 
 	};
 
-  const load_image = () => {
+  const load_image = ({url:_url = defaultUrl, ..._imageProperties} = {}) => {
 	let img = new Image();
-    img.src = url;
+		img.src = _url;
+		if (!_imageProperties) _imageProperties = imageProperties; 
+
     return new Promise((res, rej) => {
       img.onload = e => {
-		  let formattedImg = Object.assign(img, { ...imageProperties});
+		  let formattedImg = Object.assign(img, { ..._imageProperties});
 		  image = formattedImg; 
          res(formattedImg);
       };
@@ -68,13 +60,13 @@ let parent = document.body;
   };
 
 
-  const fetchModel = () => {
-	  return ml5.imageClassifier("MobileNet");
+  const fetchModel = (cb = noop) => {
+	  return ml5.imageClassifier("MobileNet", cb);
   }
   const fetchPrediction = (model, img) => {
 	  return model.predict(img);
   }
-  const model_ready = (img) => {
+  const analyzeImage = (img) => {
     return ml5
       .imageClassifier("MobileNet")
       .then(classifier => {
@@ -96,20 +88,31 @@ let parent = document.body;
 
   const init = async () => {
 	  console.log('PlainShiba.js -  url, imageProperties: ', url, imageProperties);
-	  const image = await load_image();
-	  return model_ready(image).then((results, error) => {
-		  return { results, image, error };
-	  });
+		const image = await load_image();
+		const speaker = Voice();
+
+
+		speaker.begin();
+		speaker.onEnd((fetchModel) => {
+			return processImage(image); 
+		})
+		.then((res) => {
+			console.log('FancyShiba.js -  res: ', res);
+		})
+	  // return analyzeImage(image).then((results, error) => {
+		//   return { results, image, error };
+	  // });
   }
 
   return {
-    init: init,
+  init: init,
 	processImage: processImage,
 	fetchImage: load_image,
 	fetchModel: fetchModel,
+	analyzeImage: analyzeImage,
 	fetchPrediction: fetchPrediction,
 	writeResults: write, 
   };
 };
 
-export default Shiba;
+export default FancyShiba;
