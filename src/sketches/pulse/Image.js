@@ -2,7 +2,7 @@ import Base from "../../components/Base";
 
 const noop = () => {};
 
-let defaultUrl = "../assets/images/paprika.JPG"
+let defaultUrl = "../assets/images/paprika.jpg"
 
 let defaults = {
   width: 500, 

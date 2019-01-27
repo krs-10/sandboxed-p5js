@@ -1,4 +1,4 @@
-import Base from "../../components/Base";
+
 
 const noop = () => {};
 
@@ -9,18 +9,6 @@ const defaults = {
   width: 900,
   height: 900
 };
-
-// const MODEL = () => {
-// 	ml5.imageClassifier("MobileNet", (err, good) => {
-// 		console.log("model -  err, good: ", err, good);
-// 		 LOAD().then((resp) => {
-// 			 console.log('PlainShiba.js -  resp: ', resp);
-// 		 })
-
-// 	})
-// }
-
-// MODEL()
 
 const Shiba = ({url = defaultUrl, width = 900, height = 900, ...imageProperties} = {}) => {
 // 	parent = document.body, ...rest

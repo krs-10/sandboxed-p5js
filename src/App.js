@@ -1,4 +1,4 @@
-// import Doge from "assets/images/paprika.JPG";
+// import Doge from "assets/images/paprika.jpg";
 
 // class App extends Component {
 //   state = {};
