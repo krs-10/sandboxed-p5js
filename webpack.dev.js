@@ -16,7 +16,7 @@ const DEVELOPMENT = {
   entry: {
     // vendor: ['@babel/polyfill', 'p5'],
     // vendor: ["@babel/polyfill", "p5", additionalDevIndex],
-    vendor: ["@babel/polyfill", "p5", additionalDevIndex],
+    vendor: ["@babel/polyfill", "p5", "ml5", additionalDevIndex],
     client: path.resolve(__dirname, "src/index.js")
   },
   optimization: {
@@ -36,27 +36,20 @@ const DEVELOPMENT = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, "src"),
-    // publicPath: '/assets',
     host: "0.0.0.0",
     port: 8080,
     hot: true,
     inline: true,
     historyApiFallback: true,
-    disableHostCheck: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers":
-        "X-Requested-With, content-type, Authorization"
+      "Access-Control-Allow-Headers": "*",
+      Connection: "keep-alive"
     },
     proxy: {
-      // context: ['**', '!http://localhost:8080/**'],
-      context: ["https://**"],
-      target: "http://localhost:9000/",
-      secure: false,
-      changeOrigin: true,
-      headers: {
-        Connection: "keep-alive"
+      '/proxied': {
+        target: 'http://localhost:8081',
+        pathRewrite: { '^/proxied': '' }
       }
     }
   },
@@ -80,13 +73,14 @@ const DEVELOPMENT = {
   },
   plugins: [
     // new CorsProxyWebpackPlugin(),
+    // new CorsProxyWebpackPlugin({
+    //   host: "127.0.0.1",
+    //   port: 8888
+    // }),
+
     new webpack.HotModuleReplacementPlugin()
   ]
 };
 
-// new CorsProxyWebpackPlugin({
-//   host: "127.0.0.1",
-//   port: 8888,
-// })
 
 module.exports = merge(common, DEVELOPMENT)

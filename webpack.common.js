@@ -17,7 +17,7 @@ const COMMON_RULES = [
 				loader: "file-loader",
 				options: {
 					name: "[name].[ext]",
-					outputPath: "public/images/"
+					// outputPath: "public/images/"
 				}
 			}
 		]

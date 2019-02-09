@@ -1,12 +1,8 @@
 
-
-// let register = require("cors-proxy-webpack-plugin/dist/runtime");
-// register();
-
-import "p5/lib/addons/p5.dom.js";
+// import "p5/lib/addons/p5.dom.js";
 require("./styles/skeleton.css");
 require("./styles/main.css");
-require("./../libs/p5.speech");
+// require("./../libs/p5.speech");
 
 import { MlImage } from "./components/ml5";
 import * as UTIL from "./utility";
@@ -22,11 +18,44 @@ const ImageHolder = new DocumentFragment();
 
 const InputEl = document.createElement('input'); 
 InputEl.type = "search"; 
+InputEl.value =
+  "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12224412/Shiba-Inu-On-White-01.jpg";
 
+const InputEl2 = document.createElement('input');
+InputEl2.type = "search";
+InputEl2.value =
+	"https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12224412/Shiba-Inu-On-White-01.jpg";
 
-InputEl.onsearch = ({currentTarget}) => {
-	const response = UTIL.fetchFromUrl(currentTarget.value, ((urlthing) => {
-	}), {mode: "cors"});
+// { mode: "cors" }
+InputEl.onsearch = (event) => {
+	const { target, currentTarget, ...rest} = event; 
+	console.log('index.js -  currentTarget: ', currentTarget);
+	window.test = event; 
+	UTIL.fetchFromUrlLong(
+    `/proxied/${target.value}`,
+    urlthing => {
+			console.log('WITH PROXIED -  urlthing: ', urlthing);
+
+		},
+	 {})
+}
+
+InputEl2.onsearch = (event) => {
+	console.log('index.js -  event: ', event);
+	const FOO = new Image();
+	FOO.crossOrigin = "anonymous";
+	FOO.src = event.target.value; 
+	console.log('index.js -  FOO: ', FOO);
+	root.appendChild(FOO);
+	// const { target, currentTarget, ...rest } = event;
+	// console.log('index.js -  currentTarget: ', currentTarget);
+	// window.test = event;
+	// UTIL.fetchFromUrlLong(target.value,
+	// 	urlthing => {
+	// 		console.log('no proxied -  urlthing: ', urlthing);
+
+	// 	},
+	// 	{mode: "cors"})
 }
 
 
@@ -41,4 +70,5 @@ UTIL.imageFromUrl(oak_tree_snow, (imageEl) => {
 }, {className: "image--shiba"});
 
 root.appendChild(InputEl);
+root.appendChild(InputEl2);
 root.insertAdjacentHTML("beforeEnd", '<div>https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12224412/Shiba-Inu-On-White-01.jpg');

@@ -1,2 +1,2 @@
 export { imageFromUrl } from './image';
-export { fetchFromUrl } from './form';
+export { fetchFromUrl, fetchFromUrlLong, handleReadableStream } from './form';
