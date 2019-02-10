@@ -16,8 +16,7 @@ const DEVELOPMENT = {
   entry: {
     // vendor: ['@babel/polyfill', 'p5'],
     // vendor: ["@babel/polyfill", "p5", additionalDevIndex],
-    // vendor: ["@babel/polyfill", "p5", "ml5", additionalDevIndex],
-    vendor: ["@babel/polyfill", "p5", "ml5"],
+    vendor: ["@babel/polyfill", "p5", "ml5", additionalDevIndex],
     client: path.resolve(__dirname, "src/index.js")
   },
   optimization: {
@@ -42,18 +41,15 @@ const DEVELOPMENT = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    // headers: {
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Headers": "*",
-    //   Connection: "keep-alive"
-    // },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      Connection: "keep-alive"
+    },
     proxy: {
       "/proxied": {
-        // target: 'http://localhost:8081',
-        target: "https://krs10-cors.herokuapp.com/",
-        pathRewrite: { "^/proxied/": "" },
-        secure: false, 
-        changeOrigin: true
+        target: 'http://localhost:8081',
+        pathRewrite: { "^/proxied": "" }
       }
     }
   },

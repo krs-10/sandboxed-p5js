@@ -27,18 +27,6 @@ const proxyOptions = {
 app.use(express.static(DIST_DIR));
 const proxyMiddleware = middlewareProxy(proxyOptions);
 app.use("/proxied", proxyMiddleware);
-// app.use(cors());
-// app.use("/proxied", proxyMiddleware, (req, res, next) => {
-//   console.log('server.js -  next: ', next);
-//   next()
-// });
-
-
-
-// send the user to index html page inspite of the url
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "index.html"));
-// });
 
 app.listen(process.env.PORT || 8080, () => {
   console.log(
