@@ -14,8 +14,8 @@
     "prod": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --watch --colors --config webpack.dev.js",
     "proxy-dev": "npm run dev & node server.dev.js",
-    "start": "node server.js",
-    "heroku-postbuild": "webpack --config webpack.prod.js"
+    "heroku-prebuild": "webpack --config webpack.prod.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -34,6 +34,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "copy-webpack-plugin": "^4.6.0",
+    "cors-anywhere": "^0.4.1",
     "cors-proxy-webpack-plugin": "0.0.4",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
