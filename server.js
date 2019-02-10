@@ -2,9 +2,8 @@ const path = require("path"),
   express = require("express"),
   middlewareProxy = require("http-proxy-middleware"),
   http = require("http"),
-  cors_proxy = require("cors-anywhere"),
   host = process.env.HOST || "0.0.0.0",
-  port = process.env.PORT || 9000,
+  port = process.env.PORT || 8080,
   proxyHost = "127.0.0.1",
   proxyPort = 9001;
 
@@ -27,32 +26,10 @@ app.use("/proxied", proxyMiddleware);
 
 app.use(express.static(DIST_DIR));
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log(
     "Express server listening on port %d in %s mode",
     this.address().port,
     app.settings.env
   );
 });
-
-// app.listen(port, host, () => {
-//   console.log(
-//     "Express server listening on port %d in %s mode",
-//     this.address().port,
-//     app.settings.env
-//   ); 
-
-// });
-
-
-// cors_proxy
-//   .createServer({
-//     originWhitelist: [], // Allow all origins
-//     // requireHeader: ['origin', 'x-requested-with'],
-//     requireHeader: [],
-//     removeHeaders: ["cookie", "cookie2"],
-//     redirectSameOrigin: true
-//   })
-//   .listen(proxyPort, proxyHost, function () {
-//     console.log("proxy listening to " + proxyHost + ":" + proxyPort);
-//   });
