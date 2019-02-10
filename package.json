@@ -15,6 +15,7 @@
     "proxy-prod": "npm run prod & node server.js",
     "dev": "webpack-dev-server --watch --colors --config webpack.dev.js",
     "proxy-dev": "npm run dev & node server.dev.js",
+    "heroku-prebuild": "yarn install --dev",
     "start": "npm run prod & node server.js"
   },
   "dependencies": {
