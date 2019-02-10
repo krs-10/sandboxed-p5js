@@ -30,7 +30,7 @@ InputEl.onsearch = (event) => {
 
 	UTIL.fetchFromUrlLong(
 	`/proxied/${target.value}`,
-	target.value,
+	// target.value,
     urlthing => {
 			const ProxiedImageEl = new Image();
 			ProxiedImageEl.src = urlthing.url, 
