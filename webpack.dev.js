@@ -3,18 +3,20 @@
 const webpack = require("webpack");
 const path = require("path");
 
-const merge = require("webpack-merge"),
+const CorsProxyWebpackPlugin = require('cors-proxy-webpack-plugin').CorsProxyWebpackPlugin,
+  merge = require("webpack-merge"),
   common = require('./webpack.common.js');
 
 
-
 const externals = [];
+const additionalDevIndex = path.resolve(__dirname, "src/index.dev.js");
 
 const DEVELOPMENT = {
-  mode: 'development',
+  mode: "development",
   entry: {
-    // vendor: ['@babel/polyfill', 'p5'], 
-    vendor: ['@babel/polyfill', 'p5'],
+    // vendor: ['@babel/polyfill', 'p5'],
+    // vendor: ["@babel/polyfill", "p5", additionalDevIndex],
+    vendor: ["@babel/polyfill", "p5", "ml5", additionalDevIndex],
     client: path.resolve(__dirname, "src/index.js")
   },
   optimization: {
@@ -23,12 +25,12 @@ const DEVELOPMENT = {
       cacheGroups: {
         vendor: {
           test: /node_modules/,
-          chunks: "initial", 
-          name: "vendor", 
+          chunks: "initial",
+          name: "vendor",
           reuseExistingChunk: true,
           priority: -10,
           enforce: true
-        }, 
+        }
       }
     }
   },
@@ -39,7 +41,17 @@ const DEVELOPMENT = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    disableHostCheck: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      Connection: "keep-alive"
+    },
+    proxy: {
+      '/proxied': {
+        target: 'http://localhost:8081',
+        pathRewrite: { '^/proxied': '' }
+      }
+    }
   },
   module: {
     rules: [
@@ -51,7 +63,7 @@ const DEVELOPMENT = {
             loader: "css-loader",
             options: {
               importLoaders: 1,
-              sourceMaps: true,
+              sourceMaps: true
             }
           },
           "postcss-loader"
@@ -60,8 +72,9 @@ const DEVELOPMENT = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 };
+
 
 module.exports = merge(common, DEVELOPMENT)

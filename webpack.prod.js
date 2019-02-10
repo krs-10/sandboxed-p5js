@@ -8,17 +8,18 @@ const webpack = require("webpack"),
   OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin"),
   UglifyJsPlugin = require("uglifyjs-webpack-plugin"),
   BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-    .BundleAnalyzerPlugin;
+    .BundleAnalyzerPlugin, 
+CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const merge = require("webpack-merge"), 
   common = require('./webpack.common.js');
 
-const externals = [];
+const externals = ["p5", "ml5"];
 
 const PRODUCTION = {
   mode: "production",
   entry: {
-    client: path.resolve(__dirname, "src/index.js")
+    client: path.resolve(__dirname, "src/index.js"),
   },
   output: {
     publicPath: ""
@@ -93,7 +94,8 @@ const PRODUCTION = {
   plugins: [
     new CleanWebpackPlugin("build", {}),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
-    // new BundleAnalyzerPlugin({ open: true })
+    new CopyWebpackPlugin([{from: 'src/assets', to: 'assets'}]),
+    new BundleAnalyzerPlugin({ open: true })
     // new WebpackMd5Hash
   ]
 };

@@ -1,0 +1,65 @@
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+
+* {
+	box-sizing: border-box; 
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+}
+
+img{
+	max-width: 100%; 
+	height: auto; 
+}
+
+.root__container{
+	display: flex; 
+	flex-flow: column nowrap; 
+	justify-content: flex-start; 
+	padding: 2rem; 
+}
+
+.canvas--first{
+	position: absolute; 
+}
+
+.image{
+	flex: 1 0 100%; 
+}
+
+.scaled--half{
+	transform: scale(0.5)
+}
+
+.results__container{
+	display: flex;
+	flex-flow: column nowrap; 
+}
+
+/* loading */
+.loading__container{ 
+	position: relative; 
+	padding: 1rem; 
+	&.active{
+		
+		animation: 1s infinite loading;
+	}
+}
+
+.loading__element{
+	position: absolute; 
+	left: 0; 
+	top: 0; 
+	bottom: 0; 
+	right: 0; 
+	width: 2rem; 
+	height: 2rem; 
+	border-radius: 50%; 
+	display: none; 
+	background-color: green; 
+	
+}
+
+@keyframes loading {
+    from {top: 0px;}
+    to {top: 200px;}
+}

@@ -1,20 +1,51 @@
 
-import "p5/lib/addons/p5.dom.js";
+// import "p5/lib/addons/p5.dom.js";
 require("./styles/skeleton.css");
+require("./styles/main.css");
+// require("./../libs/p5.speech");
 
-import Canvas from 'components/Canvas'; 
-import Instance from 'components/Instance';
-import Follower from 'components/Follower';
+import { MlImage } from "./components/ml5";
+import * as UTIL from "./utility";
+
+
+const root = document.querySelector('[data-root]');
+root.classList.add("root__container")
+
+const ImageHolder = new DocumentFragment(),
+	LoadingContainer = document.createElement('div');
+LoadingContainer.classList.add("loading__container");
+root.appendChild(LoadingContainer)
 
 
 
+const InputEl = document.createElement('input'); 
+InputEl.type = "search"; 
+InputEl.value =
+  "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2017/11/12224412/Shiba-Inu-On-White-01.jpg";
 
-const NewCanvas = new Canvas(1200, 200);
-// NewInstance = new Instance({ width: 900, height: 100, fill: 249, background: 230 });
+InputEl.onsearch = (event) => {
+	const { target, currentTarget, ...rest} = event; 
 
-const NewFollower = new Follower({x0: 40});
-// document.querySelector('[data-root]').innerHTML = 
-// `${new Instance({width: 900, height: 100, fill: 249, background: 230})}`;
+	LoadingContainer.classList.toggle("active", true);
 
-document.querySelector('[data-root]').innerHTML =
-	`<div>${NewCanvas.create('hi')}</div>`;
+	UTIL.fetchFromUrlLong(
+    `/proxied/${target.value}`,
+    urlthing => {
+			const ProxiedImageEl = new Image();
+			ProxiedImageEl.src = urlthing.url, 
+			ProxiedImageEl.crossOrigin = "anonymous";
+
+			ImageHolder.appendChild(ProxiedImageEl);
+			MlImage.analyzeImage(ProxiedImageEl).then((imageResults) => {
+				LoadingContainer.classList.toggle("active", false);
+				ImageHolder.appendChild(MlImage.createPredictionEl(imageResults))
+				LoadingContainer.appendChild(ImageHolder);
+				
+				
+			})
+		},
+	 {})
+}
+
+root.appendChild(InputEl);
+

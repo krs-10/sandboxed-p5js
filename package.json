@@ -12,11 +12,15 @@
   ],
   "scripts": {
     "prod": "webpack --config webpack.prod.js",
-    "dev": "webpack-dev-server --watch --colors --config webpack.dev.js"
+    "proxy-prod": "npm run prod & node server.js",
+    "dev": "webpack-dev-server --watch --colors --config webpack.dev.js",
+    "proxy-dev": "npm run dev & node server.dev.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "cors-anywhere": "^0.4.1",
     "express": "^4.16.4",
+    "ml5": "^0.2.1",
     "p5": "^0.7.2"
   },
   "devDependencies": {
@@ -24,16 +28,21 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-export-default": "^7.0.0-beta.32",
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-private-methods": "^7.2.3",
     "@babel/preset-env": "^7.1.6",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "cors-proxy-webpack-plugin": "0.0.4",
     "css-loader": "^1.0.1",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "http-proxy-middleware": "^0.19.1",
     "mini-css-extract-plugin": "^0.4.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.4.0",
+    "serviceworker-webpack-plugin": "^1.0.1",
     "style-loader": "^0.23.1",
     "svg-loader": "^0.0.2",
     "uglifyjs-webpack-plugin": "^2.0.1",
@@ -41,6 +50,7 @@
     "webpack": "^4.25.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-middleware": "^3.5.1",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
   }
