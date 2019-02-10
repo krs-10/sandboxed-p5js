@@ -15,7 +15,7 @@ const app = express(),
   HTML_FILE = path.resolve(DIST_DIR, "index.html");
 
 const proxyOptions = {
-  target: "http://localhost:9001", // target host
+  target: "https://krs10-cors-anywhere.herokuapp.com/", // target host
   changeOrigin: true, // needed for virtual hosted sites
   secure: false,
   pathRewrite: { "^/proxied": "" }
@@ -32,19 +32,19 @@ app.listen(port, host, () => {
 });
 
 
-cors_proxy
-  .createServer({
-    originWhitelist: [], // Allow all origins
-    // requireHeader: ['origin', 'x-requested-with'],
-    requireHeader: [],
-    removeHeaders: ["cookie", "cookie2"],
-    redirectSameOrigin: true,
-    // redirectSameOrigin: true,
-    // httpProxyOptions: {
-    //   // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
-    //   xfwd: false,
-    // },
-  })
-  .listen(proxyPort, proxyHost, function () {
-    console.log("proxy listening to " + proxyHost + ":" + proxyPort);
-  });
+// cors_proxy
+//   .createServer({
+//     originWhitelist: [], // Allow all origins
+//     // requireHeader: ['origin', 'x-requested-with'],
+//     requireHeader: [],
+//     removeHeaders: ["cookie", "cookie2"],
+//     redirectSameOrigin: true,
+//     // redirectSameOrigin: true,
+//     // httpProxyOptions: {
+//     //   // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
+//     //   xfwd: false,
+//     // },
+//   })
+//   .listen(proxyPort, proxyHost, function () {
+//     console.log("proxy listening to " + proxyHost + ":" + proxyPort);
+//   });

@@ -16,7 +16,8 @@ const DEVELOPMENT = {
   entry: {
     // vendor: ['@babel/polyfill', 'p5'],
     // vendor: ["@babel/polyfill", "p5", additionalDevIndex],
-    vendor: ["@babel/polyfill", "p5", "ml5", additionalDevIndex],
+    // vendor: ["@babel/polyfill", "p5", "ml5", additionalDevIndex],
+    vendor: ["@babel/polyfill", "p5", "ml5"],
     client: path.resolve(__dirname, "src/index.js")
   },
   optimization: {
@@ -71,9 +72,7 @@ const DEVELOPMENT = {
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 };
 
 

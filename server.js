@@ -3,9 +3,7 @@ const path = require("path"),
   middlewareProxy = require("http-proxy-middleware"),
   http = require("http"),
   host = process.env.HOST || "0.0.0.0",
-  port = process.env.PORT || 8080,
-  proxyHost = "127.0.0.1",
-  proxyPort = 9001;
+  port = process.env.PORT || 8080;
 
 
 
@@ -14,7 +12,7 @@ const app = express(),
   HTML_FILE = path.resolve(DIST_DIR, "index.html");
 
 const proxyOptions = {
-  target: "https://ml5-krs10.herokuapp.com", // target host
+  target: "https://ml5-krs10.herokuapp.com/", // target host
   changeOrigin: true, // needed for virtual hosted sites
   secure: false,
   pathRewrite: { "^/proxied": "" }
