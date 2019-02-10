@@ -12,7 +12,7 @@ const app = express(),
   HTML_FILE = path.resolve(DIST_DIR, "index.html");
 
 const proxyOptions = {
-  target: "https://ml5-krs10.herokuapp.com/", // target host
+  target: "https://ml5-krs10.herokuapp.com", // target host
   changeOrigin: true, // needed for virtual hosted sites
   secure: false,
   pathRewrite: { "^/proxied": "" }
