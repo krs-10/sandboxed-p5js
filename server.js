@@ -15,7 +15,7 @@ const app = express(),
   HTML_FILE = path.resolve(DIST_DIR, "index.html");
 
 const proxyOptions = {
-  target: "http://localhost:9001", // target host
+  target: "https://ml5-krs10.herokuapp.com", // target host
   changeOrigin: true, // needed for virtual hosted sites
   secure: false,
   pathRewrite: { "^/proxied": "" }
@@ -27,19 +27,32 @@ app.use("/proxied", proxyMiddleware);
 
 app.use(express.static(DIST_DIR));
 
-app.listen(port, host, () => {
-  console.log("server.js listening to " + host + ":" + port);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(
+    "Express server listening on port %d in %s mode",
+    this.address().port,
+    app.settings.env
+  );
 });
 
+// app.listen(port, host, () => {
+//   console.log(
+//     "Express server listening on port %d in %s mode",
+//     this.address().port,
+//     app.settings.env
+//   ); 
 
-cors_proxy
-  .createServer({
-    originWhitelist: [], // Allow all origins
-    // requireHeader: ['origin', 'x-requested-with'],
-    requireHeader: [],
-    removeHeaders: ["cookie", "cookie2"],
-    redirectSameOrigin: true
-  })
-  .listen(proxyPort, proxyHost, function () {
-    console.log("proxy listening to " + proxyHost + ":" + proxyPort);
-  });
+// });
+
+
+// cors_proxy
+//   .createServer({
+//     originWhitelist: [], // Allow all origins
+//     // requireHeader: ['origin', 'x-requested-with'],
+//     requireHeader: [],
+//     removeHeaders: ["cookie", "cookie2"],
+//     redirectSameOrigin: true
+//   })
+//   .listen(proxyPort, proxyHost, function () {
+//     console.log("proxy listening to " + proxyHost + ":" + proxyPort);
+//   });
