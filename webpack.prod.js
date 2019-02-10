@@ -94,8 +94,8 @@ const PRODUCTION = {
   plugins: [
     new CleanWebpackPlugin("build", {}),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
-    new CopyWebpackPlugin([{from: 'src/assets', to: 'assets'}])
-    // new BundleAnalyzerPlugin({ open: true })
+    new CopyWebpackPlugin([{from: 'src/assets', to: 'assets'}]),
+    new BundleAnalyzerPlugin({ open: true })
     // new WebpackMd5Hash
   ]
 };

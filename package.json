@@ -20,7 +20,7 @@
     "@babel/polyfill": "^7.0.0",
     "cors-anywhere": "^0.4.1",
     "express": "^4.16.4",
-    "ml5": "^0.1.3",
+    "ml5": "^0.2.1",
     "p5": "^0.7.2"
   },
   "devDependencies": {

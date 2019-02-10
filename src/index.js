@@ -7,9 +7,6 @@ require("./styles/main.css");
 import { MlImage } from "./components/ml5";
 import * as UTIL from "./utility";
 
-const moebiusURL = "../assets/images/moebius1.jpg";
-const pipe_manURL = "../assets/images/pipe_man.jpg";
-const oak_tree_snow = "./assets/images/oak_tree_snow.jpg";
 
 const root = document.querySelector('[data-root]');
 root.classList.add("root__container")

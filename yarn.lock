@@ -741,9 +741,9 @@
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
 "@magenta/sketch@^0.1.2":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@magenta/sketch/-/sketch-0.1.3.tgz#9ac1ea43cb84ebac53e561a03c0c599724cab99a"
-  integrity sha512-Iwk3+uj+/R1LB0oipMmD6wq9iAZ4yNKAVMjuXQ8M0S2tV8A9JRaCDz4CmJsyntcdpVO8IbvnfF4L9WKWFt8pdQ==
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@magenta/sketch/-/sketch-0.1.4.tgz#adb45225f0e91f1f36ddb436d49324127da0a51e"
+  integrity sha512-4xMQ3Rual//L6pRxR1ajhIgNctya3pKWaRpPAFa7gNL8d2lnYW+tThW7jbxlaCXo5iW5ugGaYFcvPsTe3sJerQ==
   dependencies:
     "@tensorflow/tfjs" "^0.13.3"
 
@@ -890,9 +890,9 @@
   integrity sha512-ZXyOOm83p7X8p3s0IYM3VeueNmHpkk/yMlP8CLeOnEcu6hIwPH7YjZBvhQkR0ZFS2DqZAxKtJ/M5fcuv3OU5BA==
 
 "@types/node@^10.1.0":
-  version "10.12.18"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
-  integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
+  version "10.12.24"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.24.tgz#b13564af612a22a20b5d95ca40f1bffb3af315cf"
+  integrity sha512-GWWbvt+z9G5otRBW8rssOFgRY87J9N/qbhqfjMZ+gUuL6zoL+Hm6gP/8qQBG4jjimqdaNLCehcVapZ/Fs2WjCQ==
 
 "@types/seedrandom@2.4.27", "@types/seedrandom@~2.4.27":
   version "2.4.27"
@@ -4101,10 +4101,10 @@ mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   dependencies:
     minimist "0.0.8"
 
-ml5@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/ml5/-/ml5-0.1.3.tgz#66575f7bfd4991415e35eb7c4ecc2d783f9eaef3"
-  integrity sha512-YqWyZaOyuK/5v53uO1/30g/jq3F07TG48Xuu3GX2/T+A/njOO1zU9fimkR2+sUHYeUbHwLBJ8vfIKJKsPckYpg==
+ml5@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/ml5/-/ml5-0.2.1.tgz#e1fbe5a223782bb127a36a85db57bc4d928c11d4"
+  integrity sha512-DvifdyFJLKq+TF/mEjDEs+jA4iZ7fv3/o/mSfjlHIGlGG5G2W+KQM7nhYFKgzvFR3IAkJaDhT9zrwNinDhXyBg==
   dependencies:
     "@magenta/sketch" "^0.1.2"
     "@tensorflow-models/knn-classifier" "0.2.2"

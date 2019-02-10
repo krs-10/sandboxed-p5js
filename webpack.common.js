@@ -63,6 +63,10 @@ const COMMON_PLUGINS = [
   })
 ];
 
+const COMMON_ENTRY = [
+
+];
+
 const COMMON = {
 	resolve: COMMON_RESOLVE, 
 	output: COMMON_OUTPUT, 

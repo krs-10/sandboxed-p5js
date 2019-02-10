@@ -72,12 +72,6 @@ const DEVELOPMENT = {
     ]
   },
   plugins: [
-    // new CorsProxyWebpackPlugin(),
-    // new CorsProxyWebpackPlugin({
-    //   host: "127.0.0.1",
-    //   port: 8888
-    // }),
-
     new webpack.HotModuleReplacementPlugin()
   ]
 };
