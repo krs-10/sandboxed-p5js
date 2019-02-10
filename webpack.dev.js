@@ -42,15 +42,18 @@ const DEVELOPMENT = {
     hot: true,
     inline: true,
     historyApiFallback: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*",
-      Connection: "keep-alive"
-    },
+    // headers: {
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Headers": "*",
+    //   Connection: "keep-alive"
+    // },
     proxy: {
-      '/proxied': {
-        target: 'http://localhost:8081',
-        pathRewrite: { '^/proxied': '' }
+      "/proxied": {
+        // target: 'http://localhost:8081',
+        target: "https://krs10-cors.herokuapp.com/",
+        pathRewrite: { "^/proxied/": "" },
+        secure: false, 
+        changeOrigin: true
       }
     }
   },
