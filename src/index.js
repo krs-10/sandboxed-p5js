@@ -29,7 +29,8 @@ InputEl.onsearch = (event) => {
 	LoadingContainer.classList.toggle("active", true);
 
 	UTIL.fetchFromUrlLong(
-    `/proxied/${target.value}`,
+	// `/proxied/${target.value}`,
+	target.value,
     urlthing => {
 			const ProxiedImageEl = new Image();
 			ProxiedImageEl.src = urlthing.url, 
@@ -40,8 +41,6 @@ InputEl.onsearch = (event) => {
 				LoadingContainer.classList.toggle("active", false);
 				ImageHolder.appendChild(MlImage.createPredictionEl(imageResults))
 				LoadingContainer.appendChild(ImageHolder);
-				
-				
 			})
 		},
 	 {})

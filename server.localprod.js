@@ -38,7 +38,12 @@ cors_proxy
     // requireHeader: ['origin', 'x-requested-with'],
     requireHeader: [],
     removeHeaders: ["cookie", "cookie2"],
-    redirectSameOrigin: true
+    redirectSameOrigin: true,
+    // redirectSameOrigin: true,
+    // httpProxyOptions: {
+    //   // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
+    //   xfwd: false,
+    // },
   })
   .listen(proxyPort, proxyHost, function () {
     console.log("proxy listening to " + proxyHost + ":" + proxyPort);
