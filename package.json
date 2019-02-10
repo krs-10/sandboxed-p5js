@@ -12,15 +12,13 @@
   ],
   "scripts": {
     "prod": "webpack --config webpack.prod.js",
-    "proxy-prod": "npm run prod & node server.js",
     "dev": "webpack-dev-server --watch --colors --config webpack.dev.js",
     "proxy-dev": "npm run dev & node server.dev.js",
-    "heroku-prebuild": "yarn install --dev",
-    "start": "npm run prod & node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "webpack --config webpack.prod.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "cors-anywhere": "^0.4.1",
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.19.1",
     "ml5": "^0.2.1",
